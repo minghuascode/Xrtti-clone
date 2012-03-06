@@ -1,0 +1,14 @@
+Package: xrtti-dev
+Version: XRTTI_VERSION
+Architecture: DEBIAN_ARCHITECTURE
+Section: libdevel
+Priority: extra
+Depends: xrtti (>= XRTTI_VERSION)
+Maintainer: Bryan Ischo <bryan@ischo.com>
+Homepage: http://www.ischo.com/xrtti
+Description: Headers, documentation, and programs for Xrtti
+ Header files, API documentation, static libraries, and the Xrtti tool.
+ This package is needed only if you are using Xrtti as part of your C++
+ development process. Programs built using the xrtti-devel package do
+ not need to have the xrtti-devel package installed to run; they just
+ need the xrtti package which includes the xrtti runtime library.

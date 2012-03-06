@@ -1,0 +1,32 @@
+REVAMP (to support anonymous structures completely):
+----------------------------------------------------
+
+* Generate "proxy" structures, which mirror the generated-for
+  classes/structures exactly, except that they are structs (all public!)
+  and they give names to all anonymous types.
+
+* Cast to/from proxy structures in all other methods
+
+* Now offsetof calculations will be easy, no anonymous types to deal with
+
+* And, for Get()/Set(), use simple assignments using offsetof to locate
+  on RHS; don't bother dereferencing the actual type (of course, could
+  also use real references since the proxy structures will never be anonymous,
+  but using offsetof will have more code re-use)
+
+* Invoke() will always be possible, using proxies to recover the root
+  object, and a dereference path from the root object.  Note that
+  the path to the method to call is specific to each field, not to each
+  class.
+
+---
+
+* Domain/Id support - allow some way to specify the mapping of domain/id
+  pairs to Contexts (nope - do this in the marshalling support library)
+
+* Handle gets/sets for anonymous fields by doing the enclosing class
+  reference thing ...
+
+* If I was totally crazy, I could even implement constructors and destructors
+  for anonymous classes by creating/destroying instances of the containing
+  class ...

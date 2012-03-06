@@ -1,0 +1,294 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>The Xrtti System -- Documentation</title>
+<link rel="stylesheet" href="documentation_files/style.css" title="Xrtti Style">
+
+</head><body>
+<p>http://www.ischo.com/xrtti/documentation.html 2012-2-24</p>
+  
+  <div id="wrapper">
+
+  <div id="toplinks">
+    <ul>
+      </ul>
+  </div>
+
+
+    <div id="top2">
+      <div id="banner">
+        <h1><font color="orange">Xrtti</font> - E<font color="orange">x</font>tended <font color="orange">r</font>un<font color="orange">t</font>ime <font color="orange">t</font>ype <font color="orange">i</font>nformation for C++</h1>
+
+<!-- This version has a color gradient -- too much? -->
+<!--        <h1><font color="#FF5500">X</font><font color="#FF6600">r</font><font color="#FF8800">t</font><font color="#FFAA00">t</font><font color="#FFCC00">i</font> - E<font color="#FF5500">x</font>tended <font color="#FF6600">r</font>un<font color="#FF8800">t</font>ime <font color="#FFAA00">t</font>ype <font color="#FFCC00">i</font>nformation for C++</h1> -->
+
+<!-- no logo yet -->        
+<!--        <div id="logo"><img src="logo.png" alt=""></div> -->
+        
+      </div>
+      
+      <div id="navigation-bar">
+        <div id="navbar">
+        <ul>
+          <li><a href="http://www.ischo.com/xrtti/index.html">Home</a></li>
+          <li><a href="http://www.ischo.com/xrtti/download.html">Download</a></li>
+          <li><a href="http://www.ischo.com/xrtti/documentation.html">Documentation</a></li>
+          <li><a href="http://www.ischo.com/xrtti/support.html">Support</a></li>
+          <li><a href="http://www.ischo.com/xrtti/licensing.html">Licensing</a></li>
+<!--          <li><a href="../stdmake">stdmake</a></li>
+          <li><a href="../essential">essential</a></li> -->
+          <li><a href="http://www.ischo.com/xrtti/contact.html">Contact</a></li>
+        </ul>
+        </div>
+      </div>
+      
+      
+    </div>
+
+</div>
+
+<!-- This line and all those above it are shared by all files in this
+     directory -->
+
+<div id="content">
+
+<h2>Using Xrtti</h2>
+
+This section gives a brief tutorial on using Xrtti.
+<p>
+Once your classes have had Xrtti classes generated for them, you can
+use the API documented below to, at runtime, introspect on your class
+definitions. Just about every aspect of your classes will be available
+to you via the Xrtti API, including methods for creating instances of
+your class, calling methods on such instances, accessing fields (via
+get and set methods), and destroying instances created in this way.
+</p><p>
+The basic steps for using Xrtti with your classes are:
+</p><ol>
+<li>
+Run the xrttigen program on the header file(s) defining your classes.
+</li>
+<li>
+Compile the resulting C++ source file, and link this source file into your program.
+</li>
+<li>
+Use the Xrtti API to reflect on your classes.
+</li>
+</ol>
+<p>
+</p><h3>Run xrttigen</h3>
+<p>
+The Xrtti system is currently based on the <a href="http://www.gccxml.org/">gccxml</a>
+ tool, which is what actually reads in and parses your C++ header files.
+  Because of this, many of the options and operations involved in this 
+step are strongly related to running the g++ compiler on your code.
+</p><p>
+If you already use the g++ compiler, then you will find this step 
+easier, since running xrttigen is very similar to running the g++ 
+compiler.  If not, you will have to construct flags to xrttigen that are
+ unlike those you are passing to your compiler.
+</p><p>
+Also, if your code compiles under g++, there is a very good chance it will work without any issues with the xrttigen program.
+</p><p>
+xrttigen needs to know the following information:
+</p><ul>
+<li>
+Where to find header files included by the input header file.  These are
+ specified using a -I &lt;directory&gt; (or multiple -I 
+&lt;directory1&gt; -I &lt;directory2&gt; etc.) arguments.
+</li><p>
+</p><li>
+      Which classes from the header file you are using as input to
+      xrttigen should have Xrtti classes generated for them. To
+      save space in the generated code, you will normally want to limit
+      the xrttigen tool to processing only the classes that you define
+      and that you care about.  xrttigen will also automatically include
+      classes that your classes reference too, so all you really need to
+      specify are the classes that xrttigen should start with, and it
+      will figure out the entire set of classes necessary to produce
+      complete reflection information for those classes.
+<p>
+      You specify which classes to include and exclude using the -i
+      and -e options to xrttigen. Each subsequent -i and -e argument
+      further refines the set of classes which will be processed.
+</p><p>
+      Normally, you'd start with "-e '*'" to tell xrttigen to not include
+      any classes except the ones that you name in later -i options. This
+      is important because the default behavior of xrttigen is to include
+      all classes, and without "-e '*'" your subsequent -i options would be
+      meaningless.
+</p><p>
+      Next, include an -i option for each class you want to process. You
+      can use simple wildcarding: "*foo" will match all classes with names
+      ending in "foo" and "foo*" will match all classes with names
+      beginning with "foo". So if all of your classes are in the same
+      namespace, for example, "MyNamespace", then you can simply use 
+      "-i 'MyNamespace::*'; or if all of your classes begin with the same
+      prefix, for example "MyLib_", you can use "-i 'MyLib_*'.
+</p><p>
+</p></li><li>
+Where to write the generated C++ code.  For example, '-o path/to/generated.cpp'.
+</li><p>
+</p><li>
+What header file(s) to read in to get your class file definitions.  These are the last arguments to xrttigen.
+</li><p>
+</p></ul>
+Additionally, you may optionally tell xrttigen:
+<ul>
+<li>
+The paths to the header files included by the input header file, as they
+ would appear in code that you would write.  For example, if you're 
+processing a file '/home/me/project/inc/Utilities/MyClasses.h' and you 
+normally include it in your code via '#include "Utilities/MyClasses.h"',
+ then you would pass this to xrttigen:
+<pre>-h "Utilities/MyClasses.h"
+</pre>
+Each header file named via "-h xxx" will result in a "#include xxx" line
+ being emitted by xrttigen into the generated source file.  Thus, you 
+can use this option to cause the generated output to reference header 
+files as source code in your project would normally reference them 
+(imagine if instead xrttigen just used the path to the header file 
+itself - you'd end up with "#include 
+"/home/me/project/inc/Utilities/MyClasses.h" - usually you don't want 
+explicit paths in your code, and -h allows you to specify the header 
+files that the generated code depends upon using relative paths).
+</li><p>
+</p><li>
+Whether or not the Xrtti system should generate associations with C++ 
+rtti information for your classes.   Associations with C++ rtti are 
+enabled by default.  Normally you would want to leave this enabled, but 
+if you are compiling your C++ code without C++ rtti, then then you will 
+want to use the -n option to disable associations with C++ rtti 
+information.
+</li><p>
+</p><li>
+      An intermediate file is used to save the output of gccxml; it is
+      normally named gccxml.out, but you can change the name
+      of this file via the -t parameter
+</li><p>
+</p></ul>
+<p>
+</p><h3>xrttigen Example</h3>
+Here is an example use of xrttigen, and some comments about what each argument does:
+<p>
+</p><pre>xrttigen     -I /home/me/project/inc                        // Add /home/me/project/inc to the header file search path
+             -I /home/me/project/inc/posix                  // Add /home/me/project/inc/posix to the header file search path
+             -D DEBUG                                       // Define DEBUG when processing header files
+             -h inc/Util.h                                  // Put '#include "inc/Util.h"' into the generated source
+             -h inc/MyClasses.h                             // Put '"#include "inc/MyClasses.h"' into the generated source
+             -n                                             // Don't generate associations between C++ rtti info and Xrtti
+             -e '*'                                         // Exclude all classes from processing by default
+             -i MessageManager                              // But include the class named MessageManager
+             -i "MyNamespace::*"                            // And also include every class in the MyNamespace namespace
+             -e MyNamespace::Garbage                        // Except for MyNamespace::Garbage
+             -o /home/me/project/MyNamespace_generated.cpp  // Write the generated source here
+             /home/me/project/inc/MyClasses.h               // And process this file to find the class definitions
+</pre>
+<p>
+
+</p><h3>Compile the generated code</h3>
+Treat the generated source code just like any other source file in your
+project.  Compile it and link it into your program.
+<p>
+
+</p><h3>Use the Xrtti API</h3>
+You must include the Xrtti.h header file in your code to use the Xrtti API.
+<p>
+Now your program can call any of the Xrtti API methods to introspect on the
+classes you processed.  For example, you could:
+</p><p>
+</p><ul>
+<li>
+Iterate over all classes you processed using Xrtti::GetContextCount() and
+Xrtti::GetContext().
+</li>
+<li>
+Create an instance of one of your classes using the Create() method of the
+corresponding Xrtti::Class.
+</li>
+<li>
+Iterate over all of the methods of that class using the GetMethodCount() and
+GetMethod() methods of the Xrtti::Class.
+</li>
+<li>
+Call one of these methods using its Invoke() method.
+</li>
+</ul>
+
+<h3>Access to Protected and Private Classes and Members</h3>
+<p>
+The xrttigen tool can only generate "complete" access to public classes
+and members.  This means that for protected and private classes and class
+members, the following will be true:
+</p><ul>
+<li>Field::HasOffsetof() will return false</li>
+<li>Field::IsAccessible() will return false</li>
+<li>Structure::IsCreatable() will return false</li>
+<li>Structure::IsDeletable() will return false</li>
+<li>Destructor::/Constructor::/Method::IsInvokeable() will return false</li>
+</ul>
+<p>
+In essence, you will be unable to call any of the Xrtti methods which
+require compile-time support, since code to support this cannot be
+generated by the xrttigen tool because the classes/members in question
+are protected or private.
+</p><p>
+You can enable Xrtti access to protected and private members of classes
+by declaring the following:
+</p><p>
+</p><pre>class XrttiAccess; // somewhere at the top of your header file, to identify
+                   // XrttiAccess as a globally-scoped class
+
+friend class ::XrttiAccess; // inside the class that you want to give the Xrtti
+                            // system access to
+</pre>
+
+For example:
+
+<pre>class XrttiAccess;
+
+class Foo
+{
+public:
+
+    void DoSomething();
+
+private:
+
+    friend class ::XrttiAccess;
+
+    Foo();
+    ~Foo();
+
+    void DoSomethingElse();
+
+    int a;
+};
+</pre>
+<p>
+With the above friend declaration, Foo is now completely accessible via
+the Xrtti system and will be constructable via Structure::Create(), and
+all of its fields and methods accessible as well.
+</p><p>
+
+<a name="api"><h2>API Documentation</h2></a>
+
+
+The doxygen-generated API documentation for Xrtti is <a href="http://www.ischo.com/xrtti/api/index.html">here</a>.
+<br><br>
+
+</p><h2>Examples</h2>
+
+This is an example of using the Xrtti API.  The purpose of this code is to
+provide a method for dumping some basic information about all objects that
+a program allocates.<p>
+    </p><ul>
+    <li><a href="http://www.ischo.com/xrtti/examples/DumpObjects.cpp">DumpObjects.cpp</a> -- the example code</li>
+    <li><a href="http://www.ischo.com/xrtti/examples/DumpObjectsTest.h">DumpObjectsTest.h</a> -- header file defining some example classes to use with DumpObjects</li>
+    <li><a href="http://www.ischo.com/xrtti/examples/DumpObjectsTest.cpp">DumpObjectsTest.cpp</a> -- a main function to run the test</li>
+    <li><a href="http://www.ischo.com/xrtti/examples/build.sh">build.sh</a> -- demonstrates how xrttigen would be run, and this example built</li>
+    </ul>
+
+</div>
+
+</body></html>

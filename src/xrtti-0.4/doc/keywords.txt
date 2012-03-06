@@ -1,0 +1,465 @@
+This is somewhat out-of-date; it was based on gccxml 0.6 output, and
+gccxml 0.7 output has differences.
+--------------------------------------------------------------------------
+Argument
+
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: default -- used
+Optional Attribute: name -- used
+
+Required Attribute: type -- used
+
+
+--------------------------------------------------------------------------
+ArrayType
+
+Optional Attribute: align -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: min (always 0) -- IGNORED
+Optional Attribute: size -- IGNORED
+
+Required Attribute: id -- used
+Required Attribute: max -- used
+Required Attribute: type -- used
+
+
+--------------------------------------------------------------------------
+Base -- IGNORED
+
+Optional Attribute: access (default="public" | "private" | "protected")
+Optional Attribute: virtual (default="0" | "1")
+
+Required Attribute: type
+
+
+--------------------------------------------------------------------------
+Class
+
+SubElements: Base -- IGNORED
+
+Optional Attribute: abstract (default="0" | "1") -- IGNORED
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: align -- IGNORED
+Optional Attribute: artificial -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: bases -- used
+Optional Attribute: incomplete (default="0" | "1") -- used
+Optional Attribute: members -- used
+Optional Attribute: name -- used
+Optional Attribute: size -- IGNORED
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: mangled -- IGNORED
+Required Attribute: name -- used
+
+
+--------------------------------------------------------------------------
+Constructor
+
+SubElement: Argument
+SubElement: Ellipsis
+
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: artificial -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: endline -- IGNORED
+Optional Attribute: extern (default="0" | "1") -- IGNORED
+Optional Attribute: throw -- used
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: mangled -- IGNORED
+Required Attribute: name -- used
+
+
+--------------------------------------------------------------------------
+Converter -- IGNORED (not sure what it's for)
+
+Optional Attribute: access (default="public" | "private" | "protected")
+Optional Attribute: attributes
+Optional Attribute: const (default="0" | "1")
+Optional Attribute: endline
+Optional Attribute: extern (default="0" | "1")
+Optional Attribute: throw
+Optional Attribute: virtual (default="0" | "1")
+
+Required Attribute: context
+Required Attribute: file
+Required Attribute: id
+Required Attribute: line
+Required Attribute: location
+Required Attribute: mangled
+Required Attribute: name
+Required Attribute: returns
+
+
+--------------------------------------------------------------------------
+CvQualifiedType
+
+Optional Attribute: align -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: const -- used
+Optional Attribute: restrict -- IGNORED
+Optional Attribute: size -- IGNORED
+Optional Attribute: volatile -- used
+
+Required Attribute: id -- used
+Required Attribute: type -- used
+
+
+--------------------------------------------------------------------------
+Destructor
+
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: artificial -- IGNORED
+Optional Attribute: endline -- IGNORED
+Optional Attribute: extern (default="0" | "1") -- IGNORED
+Optional Attribute: throw -- used
+Optional Attribute: virtual (default="0" | "1") -- used
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: mangled -- IGNORED
+Required Attribute: name -- used
+
+
+--------------------------------------------------------------------------
+Ellipsis
+
+
+--------------------------------------------------------------------------
+EnumValue
+
+Required Attribute: init -- used
+Required Attribute: name -- used
+
+
+--------------------------------------------------------------------------
+Enumeration
+
+SubElement: EnumValue
+
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: align -- IGNORED
+Optional Attribute: artificial -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: size -- IGNORED
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: name -- used
+
+
+--------------------------------------------------------------------------
+Field
+
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: bits -- used
+Optional Attribute: mangled -- IGNORED
+Optional Attribute: mutable -- IGNORED (not sure what this represents?)
+Optional Attribute: offset -- IGNORED (not sure what this represents?)
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: name -- used
+Required Attribute: type -- used
+
+
+--------------------------------------------------------------------------
+File -- IGNORED
+
+Required Attribute: id
+Required Attribute: name
+
+
+--------------------------------------------------------------------------
+Function -- IGNORED
+
+SubElement: Argument
+SubElement: Ellipsis
+
+Optional Attribute: attributes
+Optional Attribute: endline
+Optional Attribute: extern (default="0" | "1")
+Optional Attribute: mangled
+Optional Attribute: throw
+
+Required Attribute: context
+Required Attribute: file
+Required Attribute: id
+Required Attribute: line
+Required Attribute: location
+Required Attribute: name
+Required Attribute: returns
+
+
+--------------------------------------------------------------------------
+FunctionType
+
+SubElement: Argument
+SubElement: Ellipsis
+
+Optional Attribute: attributes -- IGNORED
+
+Required Attribute: id -- used
+Required Attribute: returns -- used
+
+
+--------------------------------------------------------------------------
+FundamentalType
+
+Optional Attribute: align -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: size -- IGNORED
+
+Required Attribute: id -- used
+Required Attribute: name -- used
+
+
+--------------------------------------------------------------------------
+Method
+
+SubElement: Argument
+SubElement: Ellipsis
+
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: const (default="0" | "1") -- used
+Optional Attribute: endline -- IGNORED
+Optional Attribute: extern (default="0" | "1") -- IGNORED
+Optional Attribute: pure_virtual (default="0" | "1") -- used
+Optional Attribute: static (default="0" | "1") -- IGNORED
+Optional Attribute: throw -- used
+Optional Attribute: virtual (default="0" | "1") -- used
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: mangled -- IGNORED
+Required Attribute: name -- used
+Required Attribute: returns -- used
+
+
+--------------------------------------------------------------------------
+MethodType -- IGNORED
+
+SubElement: Argument
+SubElement: Ellipsis
+
+Optional Attribute: attributes
+
+Required Attribute: basetype
+Required Attribute: id
+Required Attribute: returns
+
+
+--------------------------------------------------------------------------
+Namespace
+
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: context -- used
+Optional Attribute: mangled -- IGNORED
+Optional Attribute: members -- used
+
+Required Attribute: id -- used
+Required Attribute: name -- used
+
+
+--------------------------------------------------------------------------
+NamespaceAlias -- IGNORED
+
+Optional Attribute: context
+Optional Attribute: mangled
+
+Required Attribute: id
+Required Attribute: name
+Required Attribute: namespace
+
+
+--------------------------------------------------------------------------
+OperatorFunction -- IGNORED
+
+SubElement: Argument
+SubElement: Ellipsis
+
+Optional Attribute: attributes
+Optional Attribute: endline
+Optional Attribute: extern (default="0" | "1")
+Optional Attribute: throw
+
+Required Attribute: context
+Required Attribute: file
+Required Attribute: id
+Required Attribute: line
+Required Attribute: location
+Required Attribute: mangled
+Required Attribute: name
+Required Attribute: returns
+
+
+--------------------------------------------------------------------------
+OperatorMethod
+
+SubElement: Argument
+SubElement: Ellipsis
+
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: const (default="0" | "1") -- used
+Optional Attribute: endline -- IGNORED
+Optional Attribute: extern (default="0" | "1") -- IGNORED
+Optional Attribute: pure_virtual (default="0" | "1") -- used
+Optional Attribute: static (default="0" | "1") -- IGNORED
+Optional Attribute: throw -- used
+Optional Attribute: virtual (default="0" | "1") -- used
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: mangled -- IGNORED
+Required Attribute: name -- used
+Required Attribute: returns -- used
+
+
+--------------------------------------------------------------------------
+PointerType
+
+Optional Attribute: align -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: size -- IGNORED
+
+Required Attribute: id -- used
+Required Attribute: type - used
+
+
+--------------------------------------------------------------------------
+ReferenceType
+
+Optional Attribute: align -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: size -- IGNORED
+
+Required Attribute: id -- used
+Required Attribute: type -- used
+
+
+--------------------------------------------------------------------------
+Struct
+
+SubElements: Base -- IGNORED
+
+Optional Attribute: abstract (default="0" | "1") -- IGNORED
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: align -- IGNORED
+Optional Attribute: artificial -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: bases -- used
+Optional Attribute: incomplete (default="0" | "1") -- used
+Optional Attribute: members -- used
+Optional Attribute: name -- used
+Optional Attribute: size -- IGNORED
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: mangled -- IGNORED
+
+
+--------------------------------------------------------------------------
+Typedef
+
+Optional Attribute: attributes -- IGNORED
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: name -- used
+Required Attribute: type -- used
+
+
+--------------------------------------------------------------------------
+Unimplemented -- IGNORED
+
+Optional Attribute: function
+
+Required Attribute: id
+Required Attribute: node
+Required Attribute: tree_code ("187" | "190" | "193")
+Required Attribute: tree_code_name ("template_type_parm" | "typename_type" |
+	                            "using_decl")
+
+
+--------------------------------------------------------------------------
+Union
+
+SubElement: Base
+
+Optional Attribute: abstract (default="0" | "1") -- IGNORED
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: align -- IGNORED
+Optional Attribute: artificial -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: bases -- used
+Optional Attribute: incomplete (default="0" | "1") -- used
+Optional Attribute: members -- used
+Optional Attribute: name -- used
+Optional Attribute: size -- IGNORED
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: mangled -- IGNORED
+
+
+--------------------------------------------------------------------------
+Variable
+
+Optional Attribute: access (default="public" | "private" | "protected") -- used
+Optional Attribute: artificial -- IGNORED
+Optional Attribute: attributes -- IGNORED
+Optional Attribute: extern (default="0" | "1") -- IGNORED
+Optional Attribute: init -- IGNORED (it can be determined by fetching the field)
+Optional Attribute: mangled -- IGNORED
+
+Required Attribute: context -- used
+Required Attribute: file -- IGNORED
+Required Attribute: id -- used
+Required Attribute: line -- IGNORED
+Required Attribute: location -- IGNORED
+Required Attribute: name -- used
+Required Attribute: type -- used
+
+
+--------------------------------------------------------------------------
+GCC_XML (ArrayType | Base | Class | Constructor | Converter | CvQualifiedType |
+	Destructor | Enumeration | Field | File | Function | FunctionType | 
+	FundamentalType | Method | MethodType | Namespace | NamespaceAlias | OperatorFunction 
+	| OperatorMethod | OffsetType | PointerType | ReferenceType | Struct | Typedef | 
+	Unimplemented | Union | Variable)+>

@@ -1,0 +1,17 @@
+Package: xrtti
+Source: THIS LINE WILL BE REMOVED, dpkg-shlibdepends NEEDS IT
+Version: XRTTI_VERSION
+Architecture: DEBIAN_ARCHITECTURE
+Section: net
+Priority: extra
+Maintainer: Bryan Ischo <bryan@ischo.com>
+Homepage: http://www.ischo.com/xrtti
+Description: eXtended RunTime Type Information for C++
+ The xrtti package provides the shared libraries for runtime use of the
+ Xrtti system.  Xrtti is a tool for generating eXtended RunTime Type
+ Information for C++ programs.  This is a means for adding metaprogramming
+ capabilities to C++ programs with little developer effort.  To incorporate
+ extended runtime type information into your C++ program, run the xrttigen
+ program on your C++ header file(s) and compile the resulting C++ source code
+ file into your program.  Then your program can use the Xrtti API to
+ introspect on the classes it defines.

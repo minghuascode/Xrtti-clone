@@ -1,0 +1,15 @@
+
+Steps
+
+[1] install expat-devel package and gccxml package.
+[2] Extract xrtti.tgz
+[3] Modify GNUmakefile:
+
+Add CFLAGS: 
+
+  CFLAGS += -include /usr/include/stdio.h
+
+[4] Build:
+
+$ make exported
+
