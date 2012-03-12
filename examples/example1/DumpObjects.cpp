@@ -52,6 +52,8 @@
 // the Xrtti API
 using namespace Xrtti;
 
+typedef u32 U32;
+
 // Dump a single object - the object MUST have a vtable!  In C++, Only objects
 // with vtables can have their types dynamically detected at runtime.
 void DumpObject(void *pObject, const std::type_info &typeinfo)

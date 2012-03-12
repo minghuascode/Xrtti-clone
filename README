@@ -9,4 +9,11 @@ Build Xrtti:
 (cd cd src/xrtti-0.4; make exported)
 
 
+Quick Start:
+==============
+
+cd examples/example1
+sh build.sh
+./DumpObjectsTest
+
 
