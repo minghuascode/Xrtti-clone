@@ -128,6 +128,7 @@ CFLAGS += -Wall -Werror -Wshadow -Wextra -Wno-invalid-offsetof -Iinc \
           -D_ISOC99_SOURCE \
           -D_POSIX_C_SOURCE=200112L
 
+CFLAGS += -include /usr/include/stdio.h
 
 # --------------------------------------------------------------------------
 # Default targets are everything
